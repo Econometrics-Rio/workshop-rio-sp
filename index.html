@@ -1159,6 +1159,10 @@
     </footer>
 
     <script>
+      // Scroll to top on page load
+      window.history.scrollRestoration = "manual";
+      window.scrollTo(0, 0);
+
       // Navbar scroll effect
       const navbar = document.getElementById("navbar");
       window.addEventListener("scroll", () => {
