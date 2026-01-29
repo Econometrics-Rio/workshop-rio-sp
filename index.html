@@ -113,6 +113,7 @@
         display: flex;
         gap: 2.5rem;
         list-style: none;
+        margin: 0 2rem;
       }
 
       .nav-links a {
@@ -711,7 +712,6 @@
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        margin-right: 1rem;
         font-size: 0.9rem;
         font-weight: 600;
       }
@@ -738,6 +738,10 @@
         font-weight: 400;
       }
 
+      .mobile-lang-toggle {
+        display: none;
+      }
+
       /* Mobile Menu */
       .mobile-menu-btn {
         display: none;
@@ -750,6 +754,10 @@
 
       /* Responsive */
       @media (max-width: 968px) {
+        .lang-toggle {
+          display: none;
+        }
+
         .nav-links {
           display: none;
           position: absolute;
@@ -774,6 +782,16 @@
 
         .nav-links li:last-child {
           border-bottom: none;
+        }
+
+        .mobile-lang-toggle {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5rem;
+          padding-top: 1rem !important;
+          margin-top: 0.5rem;
+          border-bottom: none !important;
         }
 
         .mobile-menu-btn {
@@ -842,6 +860,11 @@
           <li><a href="#programa" data-en="Program" data-pt="Programa">Programa</a></li>
           <li><a href="#inscricoes" data-en="Registration" data-pt="Inscrições">Inscrições</a></li>
           <li><a href="#hospedagem" data-en="Accommodation" data-pt="Hospedagem">Hospedagem</a></li>
+          <li class="mobile-lang-toggle">
+            <span class="lang-option active" data-lang="pt">PT</span>
+            <span class="lang-divider">|</span>
+            <span class="lang-option" data-lang="en">EN</span>
+          </li>
         </ul>
         <div class="lang-toggle" id="langToggle">
           <span class="lang-option active" data-lang="pt">PT</span>
@@ -1209,15 +1232,14 @@
 
       // Language Toggle
       let currentLang = "pt";
-      const langToggle = document.getElementById("langToggle");
-      const langOptions = langToggle.querySelectorAll(".lang-option");
+      const allLangOptions = document.querySelectorAll(".lang-option");
 
       function setLanguage(lang) {
         currentLang = lang;
         document.documentElement.lang = lang === "pt" ? "pt-BR" : "en-US";
 
-        // Update active state on toggle
-        langOptions.forEach((opt) => {
+        // Update active state on all toggles (desktop and mobile)
+        allLangOptions.forEach((opt) => {
           opt.classList.toggle("active", opt.dataset.lang === lang);
         });
 
@@ -1236,7 +1258,7 @@
             : "5th Rio–São Paulo Econometrics Workshop | May 4-5, 2026";
       }
 
-      langOptions.forEach((opt) => {
+      allLangOptions.forEach((opt) => {
         opt.addEventListener("click", () => {
           setLanguage(opt.dataset.lang);
         });
